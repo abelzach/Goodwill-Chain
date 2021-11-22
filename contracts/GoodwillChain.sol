@@ -1,42 +1,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
-contract GoodwillChain is ERC721{
+contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
 
-  constructor() ERC721("GoodwillChain", "GC") {
-  }
+  constructor() ERC721("GoodwillChain NFT", "GWC") { }
 
-  uint tCount;
-  uint oCount;
+  uint public tCount;
 
   mapping(address => string) artists;
   mapping(uint => NFT) public nfts;
-  mapping(uint => Offer) public offers;
-
   
-  uint funds;
+  uint public funds;
   address payable org_address;
 
   struct NFT {
-        uint id;
-        uint price;
-        bool isListed;
-        string name;
-        string filecid;
-        string aName;
-        address artist;
-        address owner;
-    }
-  
-  struct Offer {
-        uint id;
-        uint nftID;
-        uint offerAmount;
-        address bidder;
-        address institution;
-        bool isApproved;
-    }
+    uint id;
+    uint price;
+    bool isListed;
+    string name;
+    string filecid;
+    string aName;
+    address artist;
+    address owner;
+  }
 
   modifier idExists(uint id) {
     require(id > 0 && id <= tCount);
@@ -67,11 +57,15 @@ contract GoodwillChain is ERC721{
         address buyer
     );
 
+  function setOrgAddress(address _org_address) external onlyOwner {
+    org_address = payable(_org_address);
+  }
+
   function registerArtist(string memory _name) external {
         artists[msg.sender] = _name;
     }
 
-  function createNFT(string memory _name,string memory _filecid)   external {
+  function createNFT(string memory _name,string memory _filecid) external {
         require(bytes(_name).length > 0 && bytes(_filecid).length > 0, "Name and file required");
         tCount++;
         _safeMint(msg.sender, tCount);
@@ -81,31 +75,30 @@ contract GoodwillChain is ERC721{
     }   
 
   function setPrice(uint _id, uint _price) external idExists(_id) {
+        require(msg.sender == nfts[_id].owner, "Not owner");
         nfts[_id].isListed = true;
         nfts[_id].price = _price;
+        safeTransferFrom(nfts[_id].owner, address(this), _id);
         emit setNFTPrice(_id, nfts[_id].price, nfts[_id].isListed);
     } 
 
-  function makeOffer(uint _tid, uint _amount ) external payable idExists(_tid) {
-        require(_amount > nfts[_tid].price, "Invalid offer");
-        oCount++;    
-        offers[oCount] = Offer(oCount, _tid, _amount, msg.sender, nfts[_tid].owner, false);
-    }
-
-  function approveOffer(uint _id) external {
-        approve(offers[_id].bidder, offers[_id].nftID);
-        offers[_id].isApproved = true;
-        emit offerApproved(oCount, offers[_id].nftID, offers[_id].offerAmount, offers[_id].isApproved);
-    }
-
   function buyTrack(uint _id) external payable idExists(_id) {
-        (bool paid,) = org_address.call{ value: msg.value }("");
-        require(paid == true, "Not sent");
-        //org_address.transfer(msg.value);
+        org_address.transfer(msg.value);
         funds = funds + msg.value;
-        safeTransferFrom(nfts[_id].owner, msg.sender, _id);
+        safeTransferFrom(address(this), msg.sender, _id);
         nfts[_id].owner = msg.sender;
         nfts[_id].isListed = false;
         emit boughtTrack(_id, nfts[_id].owner);
     }
+
+  function onERC721Received(
+      address,
+      address,
+      uint256,
+      bytes calldata
+  ) external override returns(bytes4) {
+      return bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
+  }
+
+  receive() external payable {}
 }
