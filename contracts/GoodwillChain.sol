@@ -11,7 +11,7 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
 
   uint public tCount;
   uint public funds;
-  address public payable org_address;
+  address payable public org_address;
 
   mapping(uint => NFT) public nfts;
   
@@ -66,22 +66,14 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
     artists[msg.sender] = _name;
   }
 
-  function createNFT(string memory _name,string memory _filecid) external {
+  function createNFT(string memory _name,string memory _filecid, uint _price) external {
     require(bytes(_name).length > 0 && bytes(_filecid).length > 0, "Name and file required");
     tCount++;
-    _safeMint(msg.sender, tCount);
+    _safeMint(address(this), tCount);
     _setTokenURI(tCount, _filecid);
-    nfts[tCount] = NFT(tCount, 0, false, _name, _filecid, artists[msg.sender], msg.sender, msg.sender);
+    nfts[tCount] = NFT(tCount, _price, true, _name, _filecid, artists[msg.sender], msg.sender, msg.sender);
     emit createdNFT(tCount, nfts[tCount].name, nfts[tCount].owner);
   }   
-
-  function setPrice(uint _id, uint _price) external idExists(_id) {
-    require(msg.sender == nfts[_id].owner, "Not owner");
-    nfts[_id].isListed = true;
-    nfts[_id].price = _price;
-    safeTransferFrom(nfts[_id].owner, address(this), _id);
-    emit setNFTPrice(_id, nfts[_id].price, nfts[_id].isListed);
-  } 
 
   function buyTrack(uint _id) external payable idExists(_id) {
     org_address.transfer(msg.value);
