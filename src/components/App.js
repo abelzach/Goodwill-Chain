@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Home.js";
 import Web3 from 'web3';
-import GoodwillChain from '../abis/GoodwillChain.json';
-
+import GoodwillChain from '../build/GoodwillChain.json';
+import Create from './create.js';
 class App extends Component {
     async componentWillMount() {
         await this.loadWeb3();
@@ -110,6 +110,9 @@ class App extends Component {
             <div className="App">
             <Switch>
             <Route exact path="/" component={Home} />
+            </Switch>
+            <Switch>
+            <Route exact path="/create" component={Create} />
             </Switch>
             </div>
             </Router>
