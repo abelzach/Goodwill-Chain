@@ -22,7 +22,7 @@ module.exports = {
     },
     alfajores: {
       provider: kit.connection.web3.currentProvider, 
-      network_id: 44787 
+      network_id: 44787
     }
   },
 
