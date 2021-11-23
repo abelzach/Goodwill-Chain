@@ -14,8 +14,8 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
   address payable public org_address;
 
   mapping(uint => NFT) public nfts;
-  
-  
+
+
   struct NFT {
     uint id;
     uint price;
@@ -28,33 +28,33 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
   }
 
   constructor() ERC721("GoodwillChain NFT", "GWC") { }
-  
+
   modifier idExists(uint id) {
     require(id > 0 && id <= tCount);
     _;
   }
 
   event createdNFT(
-    uint id, 
-    string name, 
+    uint id,
+    string name,
     address owner
   );
 
   event setNFTPrice(
-    uint id, 
-    uint newPrice, 
+    uint id,
+    uint newPrice,
     bool listed
   );
 
   event offerApproved(
     uint id,
-    uint nftID, 
-    uint amount, 
+    uint nftID,
+    uint amount,
     bool approved
   );
 
   event boughtNFT(
-    uint id, 
+    uint id,
     address buyer
   );
 
@@ -73,9 +73,9 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
     _setTokenURI(tCount, _filecid);
     nfts[tCount] = NFT(tCount, _price, true, _name, _filecid, artists[msg.sender], msg.sender, msg.sender);
     emit createdNFT(tCount, nfts[tCount].name, nfts[tCount].owner);
-  }   
+  }
 
-  function buyTrack(uint _id) external payable idExists(_id) {
+  function buyNFT(uint _id) external payable idExists(_id) {
     org_address.transfer(msg.value);
     funds = funds + msg.value;
     safeTransferFrom(address(this), msg.sender, _id);
