@@ -8,7 +8,7 @@ function Body() {
         <div className="row">
           <div className="col-lg-6 hero-intro">
             <h1>
-              "The smallest act of kindness is worth more than the grandest intnetions " -Oscar Wilde
+              "The smallest act of kindness is worth more than the grandest intentions " -Oscar Wilde
               <span>.</span>
             </h1>
             <p>
