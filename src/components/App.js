@@ -78,9 +78,9 @@ class App extends Component {
             })
     }
 
-    buyTrack(id) {
+    buyNFT(id) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.buyTrack(id).send({ from: this.state.account })
+        this.state.goodwillChain.methods.buyNFT(id).send({ from: this.state.account })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
@@ -100,7 +100,7 @@ class App extends Component {
         this.registerArtist = this.registerArtist.bind(this);
         this.setOrgAddress = this.setOrgAddress.bind(this);
         this.createNFT = this.createNFT.bind(this);
-        this.buyTrack = this.buyTrack.bind(this);
+        this.buyNFT = this.buyNFT.bind(this);
     }
 
     render() {
