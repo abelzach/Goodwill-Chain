@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./Home.js";
 class App extends Component {
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-          <h1>Goodwill Chain</h1>
-        </nav>
-      </div>
+      <>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route exact path="/" component={Home} />
+            </Switch>
+          </div>
+        </Router>
+      </>
     );
   }
 }
