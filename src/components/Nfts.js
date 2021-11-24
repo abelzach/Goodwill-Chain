@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core/";
 import Typography from "@material-ui/core/Typography"; 
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const useStyles = ({
     root: {
@@ -32,10 +33,9 @@ class Nfts extends Component {
     }  
 
     render() {
-        const {classes} = this.props;
 
-        let filterednfts = this.props.nfts.filter((nfts) => {
-              return nfts.name.indexOf(this.state.search) !== -1;
+        let filterednfts = this.props.nfts.filter((nft) => {
+              return nft.name.indexOf(this.state.search) !== -1;
             }
         );
     
@@ -48,50 +48,36 @@ class Nfts extends Component {
                 </WhiteTextTypography>
             </Typography>
             <br /><br/>
-            <center>
-            
-            <div className={classes.root}>
-            <center>
-            <Grid
-               
-            >
-                 
-                <div style={{ width: 800 }}>
-                <h2 style={{color: "black"}}>Search for Nfts</h2>
-                <br/><br/>
-                <input type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
-                <br/><br/>
-                { filterednfts.map((track, key) => {
-                  return(
-                    <React.Fragment>
-                        <div class="coupon" key={key} >
-                        <div className="card-header">
-                        <h2 style={{color: "cornflowerblue"}}>{track.name}</h2>
-                        <small style={{color: "black"}}></small>
-                        </div>
-                        <h4 style={{color: "black"}}>Owner: {track.aName}</h4>
-                        <br/>
-                        <h5 style={{color: "black"}}>NFT ID: {track.id.toString()}</h5>
-                        <ul id="postList" className="list-group list-group-flush">
-                            <li key={key} className="list-group-item py-2">
-                            <br></br>
-                            <audio controls>
-                                <source src={`https://${track.filecid}.ipfs.dweb.link`} type="" />
-                            </audio>
-                            </li>
-                        </ul>
-                        </div>
-                        <p>&nbsp;&nbsp;</p>
-                    </React.Fragment>
-                  )
-                })}
-                
+            <div className="container-fluid mt-5" style={{ textAlign: 'center' }}>
+                <div className="row">
+                    <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
+                        <h1>Purchase Literary nfts NFTs</h1>
+                        <br />
+                        <input placeholder="Enter title to search" style={{ width: '80%', margin: 'auto' }} type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
+                        <p>&nbsp;</p>
+                        {filterednfts.map((nft, key) => {
+                            return (
+                                <Card key={key}>
+                                    <Card.Body>
+                                        <Card.Title>{nft.title}</Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">Author: {nft.owner}</Card.Subtitle>
+                                        <br />
+                                        <Card.Subtitle className="mb-2 text-muted">Price: {window.web3.utils.fromWei(nft.price.toString(), 'Ether')} CELO</Card.Subtitle>
+                                        <Button
+                                            variant='primary'
+                                            name={nft.id}
+                                            onClick={(event) => {
+                                            this.props.buyNFT(event.target.name, window.web3.utils.fromWei(nft.price.toString(), 'Ether'))
+                                            }}>
+                                            Purchase NFT
+                                        </Button>
+                                    </Card.Body>
+                                </Card>
+                            )
+                        })}
+                    </main>
                 </div>
-                
-            </Grid>
-            </center>
             </div>
-            </center>
         </React.Fragment>
         );
     }

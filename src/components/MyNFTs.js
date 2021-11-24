@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core/";
+import Card from 'react-bootstrap/Card';
 import Typography from "@material-ui/core/Typography";
-
-const useStyles = ({
-    root: {
-      flexGrow: 1,
-      //padding: theme.spacing(2)
-    }
-});
 
 const WhiteTextTypography = withStyles({
   root: {
@@ -20,14 +13,7 @@ const WhiteTextTypography = withStyles({
 
 class MyNFTs extends Component {
 
-    constructor(props) {
-        super(props);
-        this.priceinput = React.createRef();
-    }
-
     render() {
-        const {classes} = this.props;
-
         return (
           <React.Fragment>
             <br/><br/>
@@ -37,46 +23,30 @@ class MyNFTs extends Component {
                 </WhiteTextTypography>
             </Typography>
             <br /><br/>
-            <center>
-            <div className={classes.root}>
-            <Grid>
-                <br/><br/>
-                <div style={{ width: 800 }}>
-                { this.props.mynfts.map((nft, key) => {
-                  return(
-                    <React.Fragment>
-                        <div class="coupon" key={key} >
-                        <div className="card-header">
-                        <h2 style={{color: "cornflowerblue"}}>{nft.name}</h2>
-                        </div>
-                        <ul id="postList" className="list-group list-group-flush">
-                            <li key={key} className="list-group-item py-2">
-                            <br></br>
-                            <audio controls>
-                                <source src={`https://${nft.filecid}.ipfs.dweb.link`} type="" />
-                            </audio>
-                            </li>
-                            <br/><br/>
-                            { nft.isListed &&
-                            <React.Fragment>
-                                <div class="form-group mx-sm-5 mb-2">
-                                    <h4 style={{color: "white"}}>Listed in auction for {window.web3.utils.fromWei(nft.price.toString())} CELO</h4>
-                                </div>
-                            </React.Fragment>
-                            }
-                        </ul>
-                        </div>
-                        <p>&nbsp;&nbsp;</p>
-                    </React.Fragment>
-                  )
-                })}
+            <div className="container-fluid mt-5" style={{ textAlign: 'center' }}>
+                <div className="row">
+                    <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
+                        <h1>Your NFTs</h1>
+                        <br />
+                        {this.props.mynfts.map((nft, key) => {
+                            return (
+                                <Card key={key}>
+                                    <Card.Body>
+                                        <Card.Title>{nft.name}</Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">NFT ID: {nft.id.toString()}</Card.Subtitle>
+                                        <Card.Subtitle className="mb-2 text-muted">Author: {nft.owner}</Card.Subtitle>
+                                        <br />
+                                        <Card.Subtitle className="mb-2 text-muted">Price bought for: {window.web3.utils.fromWei(nft.price.toString(), 'Ether')} CELO</Card.Subtitle>
+                                    </Card.Body>
+                                </Card>
+                            )
+                        })}
+                    </main>
                 </div>
-            </Grid>
             </div>
-            </center>
         </React.Fragment>
         );
     }
 }
 
-export default withStyles(useStyles)(MyNFTs);
+export default MyNFTs;

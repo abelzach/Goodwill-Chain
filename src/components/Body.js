@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "./assets/svg/wave (10).svg";
-
+import pic from '../logo.png';
 function Body() {
   return (
     <section id="hero-section">
@@ -15,12 +15,16 @@ function Body() {
               Donate for the better good.
             </p>
             <br />
+            
             <a href="#go-here">
               <button className="btn btn-lg cta">Learn More</button>
             </a>
-          </div>
-          <div className="col-lg-6 hero-image pt-5 pl-5">
             
+          </div>
+          <img src={pic} width="300" height="300"></img>
+          <br /><br />
+          <div className="col-lg-6 hero-image pt-5 pl-5">
+          
           </div>
         </div>
       </div>
