@@ -34,8 +34,8 @@ class Nfts extends Component {
     render() {
         const {classes} = this.props;
 
-        let filterednfts = this.props.nfts.filter((track) => {
-              return track.name.indexOf(this.state.search) !== -1;
+        let filterednfts = this.props.nfts.filter((nfts) => {
+              return nfts.name.indexOf(this.state.search) !== -1;
             }
         );
     
@@ -57,7 +57,7 @@ class Nfts extends Component {
             >
                  
                 <div style={{ width: 800 }}>
-                <h2 style={{color: "white"}}>Search for Nfts</h2>
+                <h2 style={{color: "black"}}>Search for Nfts</h2>
                 <br/><br/>
                 <input type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
                 <br/><br/>
@@ -67,11 +67,11 @@ class Nfts extends Component {
                         <div class="coupon" key={key} >
                         <div className="card-header">
                         <h2 style={{color: "cornflowerblue"}}>{track.name}</h2>
-                        <small style={{color: "white"}}></small>
+                        <small style={{color: "black"}}></small>
                         </div>
-                        <h4 style={{color: "white"}}>Owner: {track.aName}</h4>
+                        <h4 style={{color: "black"}}>Owner: {track.aName}</h4>
                         <br/>
-                        <h5 style={{color: "white"}}>NFT ID: {track.id.toString()}</h5>
+                        <h5 style={{color: "black"}}>NFT ID: {track.id.toString()}</h5>
                         <ul id="postList" className="list-group list-group-flush">
                             <li key={key} className="list-group-item py-2">
                             <br></br>

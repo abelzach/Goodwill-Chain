@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./Home.js";
+import Navbar from "./Navbar.js";
+import Register from "./Register.js";
+import Nfts from "./Nfts.js";
+import { SpringSpinner } from 'react-epic-spinners';
 import Web3 from 'web3';
 import GoodwillChain from '../build/GoodwillChain.json';
 import Create from './create.js';
@@ -106,16 +110,60 @@ class App extends Component {
     render() {
         return (
             <>
+            <div>
             <Router>
-            <div className="App">
-            <Switch>
-            <Route exact path="/" component={Home} />
-            </Switch>
-            <Switch>
-            <Route exact path="/create" component={Create} />
-            </Switch>
+                <Navbar />
+
+                <Route exact path="/" render={props => (
+                    <React.Fragment>
+                        {
+                        <Home />
+                        }
+                    </React.Fragment>
+                )} />  
+
+                <Route exact path="/register" render={props => (
+                    <React.Fragment>
+                    {
+                        this.state.loading
+                        ? <div class="center"><SpringSpinner size="100" color="white" /></div>
+                        : <Register registerArtist={this.registerArtist} />
+                    }
+                    </React.Fragment>
+                )} />  
+
+                <Route exact path="/create" render={props => (
+                    <React.Fragment>
+                    {
+                        this.state.loading
+                        ? <div class="center"><SpringSpinner size="100" color="white" /></div>
+                        : <Create createTrack={this.createNFT} />
+                    }
+                    </React.Fragment>
+                )} />    
+
+                <Route exact path="/nfts" render={props => (
+                    <React.Fragment>
+                    {
+                        this.state.loading
+                        ? <div class="center"><SpringSpinner size="100" color="white" /></div>
+                    :<Nfts tracks={this.buyNFT} />
+                    }
+                    </React.Fragment>
+                )} />  
+
+                {/* <Route exact path="/mytracks" render={props => (
+                    <React.Fragment>
+                    {
+                        this.state.loading
+                        ? <div class="center"><SpringSpinner size="100" color="white" /></div>
+                        :<Mytracks mytracks={this.state.mytracks} setPrice={this.setPrice} />
+                    }
+                    </React.Fragment>
+                )} /> */}
+
+                </Router>                
             </div>
-            </Router>
             </>
         );
     }
