@@ -34,6 +34,7 @@ class MyNFTs extends Component {
                                     <Card.Body>
                                         <Card.Title>{nft.name}</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">NFT ID: {nft.id.toString()}</Card.Subtitle>
+                                        <img src={`https://${nft.filecid}.ipfs.dweb.link`} height="250" width="350" alt="NFT image" />
                                         <Card.Subtitle className="mb-2 text-muted">Author: {nft.owner}</Card.Subtitle>
                                         <br />
                                         <Card.Subtitle className="mb-2 text-muted">Price bought for: {window.web3.utils.fromWei(nft.price.toString(), 'Ether')} CELO</Card.Subtitle>
