@@ -29,7 +29,16 @@ const Navbar = () => {
               My NFTS
             </a>
           </li>
-          
+          <li className="nav-item navlink-border">
+            <a className="nav-link px-4" href="/create">
+              Create NFT
+            </a>
+          </li>
+          <li className="nav-item navlink-border">
+            <a className="nav-link px-4" href="/register">
+              Register
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

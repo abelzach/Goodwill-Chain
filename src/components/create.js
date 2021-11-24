@@ -16,7 +16,7 @@ class Create extends Component {
       }
       axios.post("https://api.nft.storage/upload", this.fileinput.current.files[0], options)      
       .then((result)=>{
-        this.props.createNFT(this.nameinput.current.value, result.data.value.cid);
+        this.props.createNFT(this.nameinput.current.value, result.data.value.cid, this.priceinput.current.value);
         console.log(result.data.value.cid);
       })
       .catch((error) => {
@@ -29,7 +29,7 @@ class Create extends Component {
     super(props);
     this.fileinput = React.createRef();
     this.nameinput = React.createRef();
-
+    this.priceinput = React.createRef();
     this.state={
       fileSelected: false
     }
@@ -69,7 +69,7 @@ class Create extends Component {
               <div class="mb-3">
                 <br/>
                 <label for="exampleFormControlTextarea1" class="form-label"><h3 style={{ color: "Navy" }}>NFT Price</h3></label>
-                <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.nameinput} placeholder="Enter price of the NFT" required />
+                <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Enter price of the NFT" required />
               </div>
               <br/><br/>
 

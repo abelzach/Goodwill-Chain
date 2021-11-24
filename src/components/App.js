@@ -62,6 +62,7 @@ class App extends Component {
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
+                window.location.href = '/nfts'
             })
     }
 
@@ -89,6 +90,7 @@ class App extends Component {
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
+                window.location.href = '/mynfts'
             })
     }
 
@@ -138,7 +140,7 @@ class App extends Component {
                     {
                         this.state.loading
                         ? <div class="center"><SpringSpinner size="100" color="white" /></div>
-                        : <Create createTrack={this.createNFT} />
+                        : <Create createNFT={this.createNFT} />
                     }
                     </React.Fragment>
                 )} />
@@ -163,15 +165,6 @@ class App extends Component {
                     </React.Fragment>
                 )} />
 
-                {/* <Route exact path="/mytracks" render={props => (
-                    <React.Fragment>
-                    {
-                        this.state.loading
-                        ? <div class="center"><SpringSpinner size="100" color="white" /></div>
-                        :<Mytracks mytracks={this.state.mytracks} setPrice={this.setPrice} />
-                    }
-                    </React.Fragment>
-                )} /> */}
 
                 </Router>
             </div>

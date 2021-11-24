@@ -18,7 +18,7 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
 
   struct NFT {
     uint id;
-    uint price;
+    uint256 price;
     bool isListed;
     string name;
     string filecid;
@@ -66,7 +66,7 @@ contract GoodwillChain is ERC721, IERC721Receiver, Ownable {
     artists[msg.sender] = _name;
   }
 
-  function createNFT(string memory _name,string memory _filecid, uint _price) external {
+  function createNFT(string memory _name,string memory _filecid, uint256 _price) external {
     require(bytes(_name).length > 0 && bytes(_filecid).length > 0, "Name and file required");
     tCount++;
     _safeMint(address(this), tCount);

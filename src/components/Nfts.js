@@ -55,11 +55,15 @@ class Nfts extends Component {
                         <br />
                         <input placeholder="Enter title to search" style={{ width: '80%', margin: 'auto' }} type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
                         <p>&nbsp;</p>
-                        {filterednfts.map((nft, key) => {
+                            {filterednfts.map((nft, key) => {
+                                console.log(key.filecid);
                             return (
                                 <Card key={key}>
                                     <Card.Body>
                                         <Card.Title>{nft.title}</Card.Title>
+                                        
+                                        <img src={`https://${key.filecid}.ipfs.dweb.link`} height="250" width="350" alt="NFT image" />
+        
                                         <Card.Subtitle className="mb-2 text-muted">Author: {nft.owner}</Card.Subtitle>
                                         <br />
                                         <Card.Subtitle className="mb-2 text-muted">Price: {window.web3.utils.fromWei(nft.price.toString(), 'Ether')} CELO</Card.Subtitle>
@@ -73,14 +77,16 @@ class Nfts extends Component {
                                         </Button>
                                     </Card.Body>
                                 </Card>
+                                
                             )
                         })}
-                    </main>
-                </div>
+                        </main>
+                        
+                    </div>
+                    
             </div>
         </React.Fragment>
         );
     }
 }
-
-export default withStyles(useStyles)(Nfts);
+export default Nfts;
