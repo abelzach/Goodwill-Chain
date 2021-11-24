@@ -9,6 +9,7 @@ import { SpringSpinner } from 'react-epic-spinners';
 import Web3 from 'web3';
 import GoodwillChain from '../build/GoodwillChain.json';
 import Create from './create.js';
+import MyNFTs from './MyNFTs.js';
 class App extends Component {
     async componentWillMount() {
         await this.loadWeb3();
@@ -120,7 +121,7 @@ class App extends Component {
                         <Home />
                         }
                     </React.Fragment>
-                )} />  
+                )} />
 
                 <Route exact path="/register" render={props => (
                     <React.Fragment>
@@ -130,7 +131,7 @@ class App extends Component {
                         : <Register registerArtist={this.registerArtist} />
                     }
                     </React.Fragment>
-                )} />  
+                )} />
 
                 <Route exact path="/create" render={props => (
                     <React.Fragment>
@@ -140,7 +141,7 @@ class App extends Component {
                         : <Create createTrack={this.createNFT} />
                     }
                     </React.Fragment>
-                )} />    
+                )} />
 
                 <Route exact path="/nfts" render={props => (
                     <React.Fragment>
@@ -150,7 +151,17 @@ class App extends Component {
                     :<Nfts tracks={this.buyNFT} />
                     }
                     </React.Fragment>
-                )} />  
+                )} />
+
+                <Route exact path="/mynfts" render={props => (
+                    <React.Fragment>
+                    {
+                        this.state.loading
+                        ? <div class="center"><SpringSpinner size="100" color="white" /></div>
+                    :<MyNFTs/>
+                    }
+                    </React.Fragment>
+                )} />
 
                 {/* <Route exact path="/mytracks" render={props => (
                     <React.Fragment>
@@ -162,7 +173,7 @@ class App extends Component {
                     </React.Fragment>
                 )} /> */}
 
-                </Router>                
+                </Router>
             </div>
             </>
         );
