@@ -148,7 +148,7 @@ class App extends Component {
                     {
                         this.state.loading
                         ? <div class="center"><SpringSpinner size="100" color="white" /></div>
-                    :<Nfts tracks={this.buyNFT} />
+                    :<Nfts nfts={this.state.nfts} buyNFT={this.buyNFT} />
                     }
                     </React.Fragment>
                 )} />
@@ -158,7 +158,7 @@ class App extends Component {
                     {
                         this.state.loading
                         ? <div class="center"><SpringSpinner size="100" color="white" /></div>
-                    :<MyNFTs/>
+                    :<MyNFTs mynfts={this.state.mynfts}/>
                     }
                     </React.Fragment>
                 )} />

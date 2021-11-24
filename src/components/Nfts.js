@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography"; 
+import Typography from "@material-ui/core/Typography";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -30,7 +30,7 @@ class Nfts extends Component {
 
     updateSearch(event) {
         this.setState({search: event.target.value.substr(0,20)});
-    }  
+    }
 
     render() {
 
@@ -38,10 +38,10 @@ class Nfts extends Component {
               return nft.name.indexOf(this.state.search) !== -1;
             }
         );
-    
+
         return (
           <React.Fragment>
-            <br/><br/>          
+            <br/><br/>
             <Typography component="h1" variant="h2" align="center" color="Secondary"  gutterBottom>
                 <WhiteTextTypography variant="h2"  >
                     View nfts
