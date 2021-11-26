@@ -72,7 +72,7 @@ class Nfts extends Component {
                                             variant='primary'
                                             name={nft.id}
                                             onClick={(event) => {
-                                            this.props.buyNFT(event.target.name, window.web3.utils.fromWei(nft.price.toString(), 'Ether'))
+                                            this.props.buyNFT(event.target.name, window.web3.utils.fromWei(nft.price.toString()))
                                             }}>
                                             Purchase NFT
                                         </Button>

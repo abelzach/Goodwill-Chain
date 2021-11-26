@@ -58,10 +58,9 @@ class App extends Component {
 
     createNFT(name, filecid, price) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.createNFT(name, filecid, price).send({ from: this.state.account })
+        this.state.goodwillChain.methods.createNFT(name, filecid, window.web3.utils.toWei(price.toString())).send({ from: this.state.account })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
-                window.location.reload();
                 window.location.href = '/nfts'
             })
     }
@@ -84,9 +83,9 @@ class App extends Component {
             })
     }
 
-    buyNFT(id) {
+    buyNFT(id,price) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.buyNFT(id).send({ from: this.state.account })
+        this.state.goodwillChain.methods.buyNFT(id).send({ from: this.state.account, value: window.web3.utils.toWei(price.toString()) })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
