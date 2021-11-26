@@ -51,7 +51,7 @@ class Nfts extends Component {
             <div className="container-fluid mt-5" style={{ textAlign: 'center' }}>
                 <div className="row">
                     <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
-                        <h1>Purchase Literary nfts NFTs</h1>
+                        <h1>Purchase NFTs</h1>
                         <br />
                         <input placeholder="Enter title to search" style={{ width: '80%', margin: 'auto' }} type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />
                         <p>&nbsp;</p>
@@ -63,6 +63,7 @@ class Nfts extends Component {
                                         <Card.Title>{nft.title}</Card.Title>
 
                                         <img src={`https://${nft.filecid}.ipfs.dweb.link`} height="250" width="350" alt="NFT image" />
+                                        <br /><br />
 
                                         <Card.Subtitle className="mb-2 text-muted">Author: {nft.owner}</Card.Subtitle>
                                         <br />

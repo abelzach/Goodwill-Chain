@@ -5,7 +5,7 @@ const Navbar = () => {
   
   return (
     <nav id="go-to-top" class="navbar navbar-expand-lg selectDisable">
-      <a class="navbar-brand">Goodwill Chain </a>
+      <a class="navbar-brand" href="/">Goodwill Chain </a>
       <button
         className="navbar-toggler"
         type="button"
