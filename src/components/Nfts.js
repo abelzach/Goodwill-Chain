@@ -41,16 +41,9 @@ class Nfts extends Component {
 
         return (
           <React.Fragment>
-            <br/><br/>
-            <Typography component="h1" variant="h2" align="center" color="Secondary"  gutterBottom>
-                <WhiteTextTypography variant="h2"  >
-                    View nfts
-                </WhiteTextTypography>
-            </Typography>
-            <br /><br/>
             <div className="container-fluid mt-5" style={{ textAlign: 'center' }}>
                 <div className="row">
-                    <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 15%' }}>
+                    <main role="main" className="col-lg-12 ml-auto mr-auto" style={{ margin: '0% 10%' }}>
                         <h1>Purchase NFTs</h1>
                         <br />
                         <input placeholder="Enter title to search" style={{ width: '80%', margin: 'auto' }} type="text" class="form-control" value={this.state.search} onChange={this.updateSearch.bind(this)} />

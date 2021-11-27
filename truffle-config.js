@@ -29,7 +29,7 @@ module.exports = {
   contracts_build_directory: './src/build/',
   compilers: {
     solc: {
-      version: "0.7.1",
+      version: "0.8.2",
       optimizer: {
         enabled: true,
         runs: 200
