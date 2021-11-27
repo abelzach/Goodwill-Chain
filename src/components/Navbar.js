@@ -19,6 +19,11 @@ const Navbar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
+        <li className="nav-item navlink-border">
+            <a className="nav-link px-4" href="/register">
+              Register
+            </a>
+          </li>
           <li className="nav-item navlink-border">
             <a className="nav-link px-4" href="/nfts">
               NFTS
@@ -32,11 +37,6 @@ const Navbar = () => {
           <li className="nav-item navlink-border">
             <a className="nav-link px-4" href="/create">
               Create NFT
-            </a>
-          </li>
-          <li className="nav-item navlink-border">
-            <a className="nav-link px-4" href="/register">
-              Register
             </a>
           </li>
         </ul>

@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { withStyles } from "@material-ui/core/styles";
 import Card from 'react-bootstrap/Card';
-import Typography from "@material-ui/core/Typography";
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "white"
-  }
-})(Typography);
-
 
 class MyNFTs extends Component {
-
     render() {
         return (
           <React.Fragment>

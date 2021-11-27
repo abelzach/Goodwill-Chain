@@ -1,23 +1,7 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
-const useStyles = ({
-    root: {
-      flexGrow: 1,
-      //padding: theme.spacing(2)
-    }
-});
-
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "white"
-  }
-})(Typography);
-
 
 class Nfts extends Component {
 
@@ -27,7 +11,6 @@ class Nfts extends Component {
             search: ''
         };
     }
-
     updateSearch(event) {
         this.setState({search: event.target.value.substr(0,20)});
     }

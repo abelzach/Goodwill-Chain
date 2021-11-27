@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
@@ -10,19 +9,12 @@ import {
 } from "@material-ui/core/";
 
 
-const WhiteTextTypography = withStyles({
-  root: {
-    color: "darkblue"
-  }
-})(Typography);
-
 class Register extends Component {
 
    constructor(props) {
     super(props);
     this.nameinput = React.createRef();
   }  
-
   render() {
       return(
         <div >         

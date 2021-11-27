@@ -1,6 +1,6 @@
 import React from "react";
 
-function Cards() {
+function Cards(props) {
   return (
     <div>
       <section id="description-section">
@@ -72,7 +72,17 @@ function Cards() {
             </div>
           </div>
           <br />
-          <br />
+          <div class="card">
+            <div class="card-body">
+              <p>
+                <i class="fas fa-search fa-2x"></i>
+              </p>
+              <h2 style={{ fontWeight: "bolder" }}>TOTAL FUNDS RECEIVED</h2>
+              <h2> {props.orgBalance.toString()} CELO</h2>
+              <a href ="https://alfajores-blockscout.celo-testnet.org/address/0x1293D54725Cb3A5C8573dc9cd0E090544B1a3466/transactions" target="_blank">View organisation transaction details</a>
+              <br/>
+            </div>
+          </div>
         </div>
         <h1 style={{ color: "#00917c" }}>Help Donate</h1>
         <br />

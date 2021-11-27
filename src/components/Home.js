@@ -5,12 +5,12 @@ import Cards from "./Cards";
 import Footer from "./Footer";
 import { BrowserRouter as Router } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <Router>
-      <Body />
+      <Body/>
       <BuildFlex />
-      <Cards />
+      <Cards orgBalance={props.orgBalance} />
       <Footer />
     </Router>
   );

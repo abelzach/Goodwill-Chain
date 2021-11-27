@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Home.js";
 import Navbar from "./Navbar.js";
 import Register from "./Register.js";
 import Nfts from "./Nfts.js";
 import { SpringSpinner } from 'react-epic-spinners';
 import Web3 from 'web3';
-import GoodwillChain from '../build/GoodwillChain.json';
+import GoodwillChainMain from '../build/GoodwillChainMain.json';
 import Create from './create.js';
 import MyNFTs from './MyNFTs.js';
 class App extends Component {
@@ -32,33 +32,31 @@ class App extends Component {
         const web3 = window.web3;
         const accounts = await web3.eth.getAccounts();
         this.setState({ account: accounts[0] });
-        const networkId = await web3.eth.net.getId();
-        const networkData = GoodwillChain.networks[networkId];
 
-        if (networkData) {
-            const goodwillChain = new web3.eth.Contract(GoodwillChain.abi, networkData.address);
-            this.setState({ goodwillChain });
-            const tCount = await goodwillChain.methods.tCount.call();
-            for (let i = 1; i <= tCount; i++) {
-                const nft = await goodwillChain.methods.nfts(i).call();
+        const GCMain = new web3.eth.Contract(GoodwillChainMain.abi, "0x34e1574689Db3bCC0eAE0d269d1Fc535D125AF94");
+        this.setState({ GCMain });
+        const tCount = await GCMain.methods.tCount.call();
+        for (let i = 1; i <= tCount; i++) {
+            const nft = await GCMain.methods.nfts(i).call();
+            this.setState({
+                nfts: [...this.state.nfts, nft]
+            });
+            if (nft.owner === this.state.account) {
                 this.setState({
-                    nfts: [...this.state.nfts, nft]
+                    mynfts: [...this.state.mynfts, nft]
                 });
-                if (nft.owner == this.state.account) {
-                    this.setState({
-                        mynfts: [...this.state.mynfts, nft]
-                    });
-                }
             }
-            this.setState({ loading: false });
-        } else {
-            window.alert('Contract could not be deployed.');
         }
+        const orgB = await window.web3.eth.getBalance("0x1293D54725Cb3A5C8573dc9cd0E090544B1a3466");
+        const orgBalance = window.web3.utils.fromWei(orgB.toString());
+        this.setState({ orgBalance });
+        this.setState({ loading: false });
+        
     }
 
     createNFT(name, filecid, price) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.createNFT(name, filecid, window.web3.utils.toWei(price.toString())).send({ from: this.state.account })
+        this.state.GCMain.methods.createNFT(name, filecid, window.web3.utils.toWei(price.toString())).send({ from: this.state.account })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.href = '/nfts'
@@ -67,7 +65,7 @@ class App extends Component {
 
     registerArtist(name) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.registerArtist(name).send({ from: this.state.account })
+        this.state.GCMain.methods.registerArtist(name).send({ from: this.state.account })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
@@ -76,7 +74,7 @@ class App extends Component {
 
     setOrgAddress(org_address) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.setOrgAddress(org_address).send({ from: this.state.account })
+        this.state.GCMain.methods.setOrgAddress(org_address).send({ from: this.state.account })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
@@ -85,7 +83,7 @@ class App extends Component {
 
     buyNFT(id,price) {
         this.setState({ loading: true });
-        this.state.goodwillChain.methods.buyNFT(id).send({ from: this.state.account, value: window.web3.utils.toWei(price.toString()) })
+        this.state.GCMain.methods.buyNFT(id).send({ from: this.state.account, value: window.web3.utils.toWei(price.toString()) })
             .once('confirmation', (n, receipt) => {
                 this.setState({ loading: false });
                 window.location.reload();
@@ -97,10 +95,11 @@ class App extends Component {
         super(props)
         this.state = {
             account: '',
-            goodwillChain: null,
+            GCMain: null,
             nfts: [],
             mynfts: [],
-            loading: false
+            loading: false,
+            orgBalance: 0
         }
 
         this.registerArtist = this.registerArtist.bind(this);
@@ -119,7 +118,7 @@ class App extends Component {
                 <Route exact path="/" render={props => (
                     <React.Fragment>
                         {
-                        <Home />
+                            <Home orgBalance={this.state.orgBalance}/>
                         }
                     </React.Fragment>
                 )} />

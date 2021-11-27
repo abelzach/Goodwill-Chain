@@ -21,7 +21,7 @@ function Body() {
             </a>
             
           </div>
-          <img src={pic} width="300" height="300"></img>
+          <img src={pic} width="300" height="300" alt="NFT image"></img>
           <br /><br />
           <div className="col-lg-6 hero-image pt-5 pl-5">
           
@@ -29,6 +29,7 @@ function Body() {
         </div>
       </div>
       <img className="hero-wave" src={Banner} alt="hero-wave" />
+      
     </section>
   );
 }
