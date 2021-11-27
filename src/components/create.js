@@ -72,7 +72,7 @@ class Create extends Component {
                 <input type="text" class="form-control" id="exampleFormControlInput1" ref={this.priceinput} placeholder="Enter price of the NFT" required />
               </div>
               <br/><br/>
-              <button type="submit" class="btn btn-success mb-3">Mint NFT</button>
+              <button type="submit" class="btn btn-success mb-3">Create NFT</button>
               <br/><br/>
             </form>
           </div>
