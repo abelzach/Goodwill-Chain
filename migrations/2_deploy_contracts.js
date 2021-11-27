@@ -1,15 +1,14 @@
-const GoodwillChain = artifacts.require('GoodwillChain');
-const GoodwillChainToken = artifacts.require('GoodwillChainToken');
+const GoodwillChainMain = artifacts.require('GoodwillChainMain');
+const GCToken = artifacts.require('GCToken');
 
 module.exports = async function (deployer) {
-    deployer.deploy(GoodwillChain);
-    deployer.deploy(GoodwillChainToken);
-
-    const GCMain = await GoodwillChain.deployed();
-    const GCToken = await GoodwillChainToken.deployed();
+    deployer.deploy(GoodwillChainMain);
+    deployer.deploy(GCToken);
+    const GCMain = await GoodwillChainMain.deployed();
+    const GCT = await GCToken.deployed();
 
     const MINTER_ROLE = web3.utils.soliditySha3("MINTER_ROLE");
-    await GCToken.grantRole(MINTER_ROLE, GCMain.address);
+    await GCT.grantRole(MINTER_ROLE, GCMain.address);
 
-    await GCMain.setOrgAddress("");
+    await GCMain.setOrgAddress("0x29398D6764Ec9a94653cF04845ABc0c2D758BC2d");
 }

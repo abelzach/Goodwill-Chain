@@ -4,9 +4,12 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "./GCToken.sol";
 
-contract GoodwillChain is ERC721, ERC721URIStorage, Ownable {
+interface IGCToken {
+  function mint(address to, uint256 amount) external;
+}
+
+contract GoodwillChainMain is ERC721, ERC721URIStorage, Ownable {
 
   address gctAddress;
   mapping(address => string) artists;
@@ -88,7 +91,7 @@ contract GoodwillChain is ERC721, ERC721URIStorage, Ownable {
     require(bytes(_name).length > 0 && bytes(_filecid).length > 0, "Name and file required");
     tCount++;
     nfts[tCount] = NFT(tCount, _price, true, _name, _filecid, artists[msg.sender], msg.sender, msg.sender);
-    GCToken(gctAddress).mint(msg.sender, 1 ether);
+    IGCToken(gctAddress).mint(msg.sender, 1 ether);
     emit createdNFT(tCount, nfts[tCount].name, nfts[tCount].owner);
   }
 
