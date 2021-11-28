@@ -4,7 +4,7 @@ Decentralized NFT Marketplace to raise funds for charity organizations or progra
 ![logo](/src/logo.png?raw=true)
 
 
-#### [Smart Contract deployed on Celo Alfajores Testnet](https://alfajores-blockscout.celo-testnet.org/address/0xAf442D5DC79f489bd0B6004A3367156eb3A26b57)
+#### [Smart Contract deployed on Celo Alfajores Testnet](https://alfajores-blockscout.celo-testnet.org/address/0x34e1574689Db3bCC0eAE0d269d1Fc535D125AF94)
 
 <br/>
 Goodwill Chain works as an NFT marketplace to support charitable fundraising. Digital artists and content creators can upload their content to create NFTs out of them. The proceeds from the sales of these NFTs goes directly to the address of the charitable organization. Hence the transactions and funds data of the organization is present in a transparent manner where it can be verified by the general public. This is to ensure a transparent way of charity fundraising and to uphold reliability and inclusivity in the platform. The prototype of the DApp has been built using Celo Alfajores Testnet.
@@ -26,7 +26,7 @@ Celo Extension Wallet and set network as Alfajores Test Network.
 ```
 $ git clone https://github.com/abelzach/Goodwill-Chain
 
-$ cd Goodwill Chain
+$ cd Goodwill-Chain
 ```
 
 ### Install Dependencies
